@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}التحليل — Packet Analyzer{% endblock %}
+{% block page_id %}analysis{% endblock %}
+{% block content %}
+<section class="page-header">
+  <h2 class="page-title">التحليل والإحصاءات</h2>
+  <p class="page-desc">أعلى العناوين، البروتوكولات، المنافذ، والاتجاهات الزمنية.</p>
+</section>
+
+<div class="two-cols">
+  <div class="panel">
+    <h3 class="panel-heading">أعلى 10 عناوين IP (مصدر)</h3>
+    <div id="topSrcList" class="bar-list"></div>
+  </div>
+  <div class="panel">
+    <h3 class="panel-heading">أعلى 10 عناوين IP (وجهة)</h3>
+    <div id="topDstList" class="bar-list"></div>
+  </div>
+</div>
+
+<div class="panel">
+  <h3 class="panel-heading">توزيع البروتوكولات (نسب مئوية)</h3>
+  <div id="protoPercent" class="proto-percent-grid"></div>
+</div>
+
+<div class="panel">
+  <h3 class="panel-heading">أكثر المنافذ استخداماً (وجهة)</h3>
+  <div id="portsTable" class="table-scroll"></div>
+</div>
+
+<div class="panel">
+  <h3 class="panel-heading">الحزم عبر الزمن</h3>
+  <div class="time-bucket-row">
+    <button type="button" class="btn btn-secondary btn-bucket active" data-bucket="hour">ساعة</button>
+    <button type="button" class="btn btn-secondary btn-bucket" data-bucket="day">يوم</button>
+    <button type="button" class="btn btn-secondary btn-bucket" data-bucket="week">أسبوع</button>
+  </div>
+  <div class="chart-wrap">
+    <canvas id="chartTime" height="260"></canvas>
+  </div>
+</div>
+
+<div class="panel">
+  <h3 class="panel-heading">كشف الأنماط الشاذة</h3>
+  <div id="anomalyBox" class="anomaly-box"></div>
+</div>
+{% endblock %}

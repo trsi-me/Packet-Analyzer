@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}الإعدادات — Packet Analyzer{% endblock %}
+{% block page_id %}settings{% endblock %}
+{% block content %}
+<section class="page-header">
+  <h2 class="page-title">إعدادات التطبيق</h2>
+  <p class="page-desc">واجهة الشبكة، حد التخزين، وإدارة البيانات.</p>
+</section>
+
+<div class="panel">
+  <h3 class="panel-heading">واجهة الشبكة</h3>
+  <p class="field-help">اختر الواجهة المستخدمة عند بدء التسجيل من لوحة التحكم.</p>
+  <select id="ifaceSelect" class="input-control input-wide"></select>
+  <button type="button" class="btn btn-secondary" id="btnRefreshIfaces">تحديث القائمة</button>
+</div>
+
+<div class="panel">
+  <h3 class="panel-heading">الحد الأقصى لعدد الحزم في قاعدة البيانات</h3>
+  <input type="number" id="maxPackets" class="input-control" min="1000" step="1000" value="100000">
+  <button type="button" class="btn btn-primary" id="btnSaveSettings">حفظ الإعدادات</button>
+</div>
+
+<div class="panel">
+  <h3 class="panel-heading">حجم قاعدة البيانات</h3>
+  <p class="stat-value" id="dbSizeText">—</p>
+</div>
+
+<div class="panel panel-danger-zone">
+  <h3 class="panel-heading">حذف بيانات التقاط</h3>
+  <p class="field-help">يُحذف جدول الحزم وسجلات الجلسات فقط. الفلاتر المحفوظة والإعدادات لا تُمس. لا يمكن التراجع.</p>
+  <button type="button" class="btn btn-danger" id="btnClearAll">حذف بيانات التقاط</button>
+</div>
+
+<div class="panel">
+  <h3 class="panel-heading">معلومات التطبيق</h3>
+  <p class="info-line">الاسم: <strong>Packet Analyzer</strong></p>
+  <p class="info-line">الإصدار: <strong id="appVerDisplay">{{ version }}</strong></p>
+</div>
+{% endblock %}

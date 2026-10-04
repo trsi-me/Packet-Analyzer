@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}الحزم — Packet Analyzer{% endblock %}
+{% block page_id %}packets{% endblock %}
+{% block content %}
+<section class="page-header">
+  <h2 class="page-title">جدول الحزم</h2>
+  <p class="page-desc">عرض وتصفية الحزم المُلتقطة مع ترقيم الصفحات.</p>
+</section>
+
+<div class="panel filters-bar">
+  <div class="filters-inline">
+    <label class="field-label" for="protoFilter">البروتوكول</label>
+    <select id="protoFilter" class="input-control">
+      <option value="all">الكل</option>
+      <option value="TCP">TCP</option>
+      <option value="UDP">UDP</option>
+      <option value="ICMP">ICMP</option>
+      <option value="ARP">ARP</option>
+      <option value="DNS">DNS</option>
+      <option value="HTTP">HTTP</option>
+      <option value="Other">Other</option>
+    </select>
+    <label class="field-label" for="searchInput">بحث IP أو منفذ</label>
+    <input type="search" id="searchInput" class="input-control" placeholder="مثال: 192.168 أو 443">
+    <button type="button" class="btn btn-secondary" id="btnApplyFilters">تطبيق</button>
+    <a class="btn btn-accent" id="btnExportCsv" href="/api/export/csv">تصدير CSV</a>
+  </div>
+</div>
+
+<div class="panel table-panel">
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>الرقم</th>
+          <th>الوقت</th>
+          <th>المصدر (IP:منفذ)</th>
+          <th>الوجهة (IP:منفذ)</th>
+          <th>البروتوكول</th>
+          <th>الحجم (بايت)</th>
+          <th>التفاصيل</th>
+          <th>إجراءات</th>
+        </tr>
+      </thead>
+      <tbody id="packetsTableBody">
+        <tr><td colspan="8" class="cell-empty">جاري التحميل...</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination-bar">
+    <button type="button" class="btn btn-secondary" id="btnPrevPage">السابق</button>
+    <span id="pageInfo" class="page-info">صفحة 1</span>
+    <button type="button" class="btn btn-secondary" id="btnNextPage">التالي</button>
+  </div>
+</div>
+
+<div id="detailModal" class="modal" hidden>
+  <div class="modal-backdrop" data-close="1"></div>
+  <div class="modal-card panel">
+    <h3 class="panel-heading">تفاصيل الحزمة</h3>
+    <pre class="detail-pre" id="detailContent"></pre>
+    <button type="button" class="btn btn-primary" id="btnCloseModal">إغلاق</button>
+  </div>
+</div>
+{% endblock %}

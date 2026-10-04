@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}الفلاتر — Packet Analyzer{% endblock %}
+{% block page_id %}filters{% endblock %}
+{% block content %}
+<section class="page-header">
+  <h2 class="page-title">الفلاتر والبحث المتقدم</h2>
+  <p class="page-desc">حدد معايير دقيقة واحفظ الفلاتر المستخدمة بشكل متكرر.</p>
+</section>
+
+<div class="panel filter-form-panel">
+  <h3 class="panel-heading">معايير الفلترة</h3>
+  <div class="form-grid">
+    <div class="field">
+      <label class="field-label" for="fSrcIp">IP مصدر</label>
+      <input type="text" id="fSrcIp" class="input-control" placeholder="مثال: 192.168.1">
+    </div>
+    <div class="field">
+      <label class="field-label" for="fDstIp">IP وجهة</label>
+      <input type="text" id="fDstIp" class="input-control">
+    </div>
+    <div class="field">
+      <label class="field-label" for="fProto">البروتوكول</label>
+      <select id="fProto" class="input-control">
+        <option value="">الكل</option>
+        <option value="TCP">TCP</option>
+        <option value="UDP">UDP</option>
+        <option value="ICMP">ICMP</option>
+        <option value="ARP">ARP</option>
+        <option value="DNS">DNS</option>
+        <option value="HTTP">HTTP</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="field">
+      <label class="field-label" for="fPort">المنفذ</label>
+      <input type="text" id="fPort" class="input-control" placeholder="رقم أو جزء منه">
+    </div>
+    <div class="field">
+      <label class="field-label" for="fFrom">من وقت</label>
+      <input type="datetime-local" id="fFrom" class="input-control">
+    </div>
+    <div class="field">
+      <label class="field-label" for="fTo">إلى وقت</label>
+      <input type="datetime-local" id="fTo" class="input-control">
+    </div>
+    <div class="field">
+      <label class="field-label" for="fSizeMin">أقل حجم (بايت)</label>
+      <input type="number" id="fSizeMin" class="input-control" min="0">
+    </div>
+    <div class="field">
+      <label class="field-label" for="fSizeMax">أقصى حجم (بايت)</label>
+      <input type="number" id="fSizeMax" class="input-control" min="0">
+    </div>
+  </div>
+  <div class="form-actions">
+    <button type="button" class="btn btn-primary" id="btnApplyFilter">تطبيق الفلتر</button>
+    <button type="button" class="btn btn-secondary" id="btnResetFilter">إعادة تعيين</button>
+  </div>
+</div>
+
+<div class="panel">
+  <h3 class="panel-heading">حفظ فلتر باسم</h3>
+  <div class="save-filter-row">
+    <input type="text" id="saveFilterName" class="input-control" placeholder="اسم الفلتر">
+    <button type="button" class="btn btn-accent" id="btnSaveFilter">حفظ</button>
+  </div>
+  <div id="savedFiltersList" class="saved-filters-list"></div>
+</div>
+
+<div class="panel table-panel">
+  <h3 class="panel-heading">نتائج الفلتر</h3>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>الرقم</th>
+          <th>الوقت</th>
+          <th>المصدر</th>
+          <th>الوجهة</th>
+          <th>البروتوكول</th>
+          <th>الحجم</th>
+        </tr>
+      </thead>
+      <tbody id="filterResultsBody">
+        <tr><td colspan="6" class="cell-empty">اضغط «تطبيق الفلتر» لعرض النتائج.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

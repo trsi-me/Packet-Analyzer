@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}لوحة التحكم — Packet Analyzer{% endblock %}
+{% block page_id %}dashboard{% endblock %}
+{% block content %}
+<section class="page-header">
+  <h2 class="page-title">لوحة التحكم</h2>
+  <p class="page-desc">نظرة عامة فورية على حركة الشبكة والتسجيل.</p>
+</section>
+
+<div class="toolbar-row">
+  <div class="recording-panel">
+    <span class="badge badge-recording" id="recBadge">متوقف</span>
+    <button type="button" class="btn btn-primary btn-large" id="btnToggleRec">ابدأ التسجيل</button>
+  </div>
+  <p class="hint-text" id="adminHint"></p>
+</div>
+
+<div class="stats-grid">
+  <div class="panel stat-panel">
+    <h3 class="panel-heading">إجمالي الحزم</h3>
+    <p class="stat-value" id="statTotal">0</p>
+  </div>
+  <div class="panel stat-panel">
+    <h3 class="panel-heading">حزم/ثانية</h3>
+    <p class="stat-value" id="statPps">0</p>
+  </div>
+  <div class="panel stat-panel">
+    <h3 class="panel-heading">أعلى بروتوكول</h3>
+    <p class="stat-value stat-value-sm" id="statTopProto">—</p>
+  </div>
+  <div class="panel stat-panel">
+    <h3 class="panel-heading">أعلى IP مصدر</h3>
+    <p class="stat-value stat-value-sm" id="statTopSrc">—</p>
+  </div>
+</div>
+
+<div class="charts-row">
+  <div class="panel chart-panel">
+    <h3 class="panel-heading">معدل الحزم (آخر دقيقة تقريباً)</h3>
+    <div class="chart-wrap">
+      <canvas id="chartPps" height="220"></canvas>
+    </div>
+  </div>
+  <div class="panel chart-panel">
+    <h3 class="panel-heading">توزيع البروتوكولات</h3>
+    <div class="chart-wrap chart-wrap-doughnut">
+      <canvas id="chartProto" height="220"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="panel table-panel">
+  <h3 class="panel-heading">أحدث 10 حزم</h3>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>الوقت</th>
+          <th>المصدر</th>
+          <th>الوجهة</th>
+          <th>البروتوكول</th>
+          <th>الحجم</th>
+        </tr>
+      </thead>
+      <tbody id="recentPacketsBody">
+        <tr><td colspan="6" class="cell-empty">لا توجد بيانات بعد.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

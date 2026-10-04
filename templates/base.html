@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Packet Analyzer{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  {% block head_extra %}{% endblock %}
+</head>
+<body data-page="{% block page_id %}{% endblock %}">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="{{ url_for('serve_assets', filename='images/Logo.jpeg') }}" alt="شعار Packet Analyzer" class="sidebar-logo" width="120" height="auto">
+        <h1 class="sidebar-title">Packet Analyzer</h1>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="{{ url_for('index') }}" class="nav-link {% if request.endpoint == 'index' %}active{% endif %}">
+          <span class="nav-icon" aria-hidden="true">&#9632;</span> لوحة التحكم
+        </a>
+        <a href="{{ url_for('packets_page') }}" class="nav-link {% if request.endpoint == 'packets_page' %}active{% endif %}">
+          <span class="nav-icon" aria-hidden="true">&#9776;</span> الحزم
+        </a>
+        <a href="{{ url_for('analysis_page') }}" class="nav-link {% if request.endpoint == 'analysis_page' %}active{% endif %}">
+          <span class="nav-icon" aria-hidden="true">&#9733;</span> التحليل
+        </a>
+        <a href="{{ url_for('filters_page') }}" class="nav-link {% if request.endpoint == 'filters_page' %}active{% endif %}">
+          <span class="nav-icon" aria-hidden="true">&#8981;</span> الفلاتر
+        </a>
+        <a href="{{ url_for('settings_page') }}" class="nav-link {% if request.endpoint == 'settings_page' %}active{% endif %}">
+          <span class="nav-icon" aria-hidden="true">&#9881;</span> الإعدادات
+        </a>
+      </nav>
+      <div class="sidebar-status">
+        <span class="status-dot" id="connStatusDot"></span>
+        <span id="connStatusText">جاري الاتصال...</span>
+      </div>
+    </aside>
+    <main class="main-area">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+  <script>
+    window.APP_VERSION = "{{ version }}";
+  </script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
